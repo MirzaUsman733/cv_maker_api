@@ -1,0 +1,148 @@
+{
+    "cv_unique_id": "CV12345",
+    "cv_info": {
+        "user": {
+            "id": 1,
+            "first_name": "First Name",
+            "last_name": "Last Name",
+            "job_title": "Job Title",
+            "address": "Address",
+            "city": "City",
+            "postal_code": "Postal Code",
+            "country": "Country",
+            "phone": "Phone",
+            "email": "Email",
+            "date_of_birth": "YYYY-MM-DD",
+            "place_of_birth": "Place Of Birth",
+            "nationality": "Nationality",
+            "summary": "Summmary"
+        },
+        "employment_history": [
+            {
+                "id": 1,
+                "job_title": "Software Engineer",
+                "employer": "Tech Corp",
+                "city": "City A",
+                "description": "Worked on various software projects.",
+                "start_date": "2020-01-01",
+                "end_date": "2021-12-31",
+                "is_current": false
+            },
+            {
+                "id": 2,
+                "job_title": "Senior Developer",
+                "employer": "Innovate Ltd",
+                "city": "City B",
+                "description": "Led a team of developers.",
+                "start_date": "2022-01-01",
+                "end_date": "2023-12-31",
+                "is_current": true
+            }
+        ],
+        "education": [
+            {
+                "id": 1,
+                "degree": "Bachelor's in Computer Science",
+                "school_name": "University A",
+                "city": "City A",
+                "start_date": "2015-09-01",
+                "end_date": "2019-06-30",
+                "description": "Studied core computer science subjects."
+            },
+            {
+                "id": 2,
+                "degree": "Master's in Data Science",
+                "school_name": "University B",
+                "city": "City B",
+                "start_date": "2020-09-01",
+                "end_date": "2022-06-30",
+                "description": "Specialized in data analytics and AI."
+            }
+        ],
+        "courses": [
+            {
+                "id": 1,
+                "title": "Machine Learning Basics",
+                "institution": "Online University",
+                "start_date": "2021-03-01",
+                "end_date": "2021-05-01"
+            },
+            {
+                "id": 2,
+                "title": "Advanced Python Programming",
+                "institution": "Coding Academy",
+                "start_date": "2022-07-01",
+                "end_date": "2022-09-01"
+            }
+        ],
+        "internships": [
+            {
+                "id": 1,
+                "job_title": "Intern",
+                "company": "Startup Inc",
+                "city": "City C",
+                "description": "Assisted in software development projects.",
+                "start_date": "2019-07-01",
+                "end_date": "2019-12-31"
+            },
+            {
+                "id": 2,
+                "job_title": "Data Science Intern",
+                "company": "DataCorp",
+                "city": "City D",
+                "description": "Worked on data analysis and visualization.",
+                "start_date": "2020-01-01",
+                "end_date": "2020-06-30"
+            }
+        ],
+        "skills": [
+            {
+                "id": 1,
+                "skill": "Python",
+                "proficiency": 5
+            },
+            {
+                "id": 2,
+                "skill": "Machine Learning",
+                "proficiency": 4
+            },
+            {
+                "id": 3,
+                "skill": "Data Analysis",
+                "proficiency": 4
+            }
+        ],
+        "links": [
+            {
+                "id": 1,
+                "label": "LinkedIn",
+                "url": "https://linkedin.com/in/username"
+            },
+            {
+                "id": 2,
+                "label": "GitHub",
+                "url": "https://github.com/username"
+            }
+        ],
+        "hobbies": {
+            "description": "Reading, Coding, Hiking"
+        },
+        "languages": [
+            {
+                "id": 1,
+                "language": "English",
+                "proficiency": 5
+            },
+            {
+                "id": 2,
+                "language": "Spanish",
+                "proficiency": 4
+            },
+            {
+                "id": 3,
+                "language": "French",
+                "proficiency": 3
+            }
+        ]
+    }
+}
