@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-app.use('/v1/api', cvRoutes);
+app.use('/v1', cvRoutes);
 app.use('/v1/account', authRoutes);
 
 const PORT = process.env.PORT || 3000;
