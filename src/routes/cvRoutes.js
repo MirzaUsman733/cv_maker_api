@@ -4,14 +4,14 @@ const express = require('express');
 const router = express.Router();
 const cvController = require('../controllers/cvController');
 const authMiddleware = require('../middleware/authMiddleware');
-const apiKeyMiddleware = require('../middleware/apiKeyMiddleware'); // Import the API key middleware
+const apiKeyMiddleware = require('../middleware/apiKeyMiddleware');
 const { body } = require('express-validator');
 
 // Route to create a new CV with authentication and input validation
 router.post(
   '/cvs',
-  authMiddleware,   // Protect route with JWT middleware
-  apiKeyMiddleware, // Check x-api-key header
+  authMiddleware,
+  apiKeyMiddleware,
   [
     body('cv_unique_id').notEmpty().withMessage('CV unique ID is required'),
     body('cv_info.user.first_name').notEmpty().isString().withMessage('First name is required and must be a string'),

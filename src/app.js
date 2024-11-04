@@ -11,12 +11,12 @@ const app = express();
 
 // Middleware
 app.use(helmet());           // Security headers
-app.use(cors());             // Cross-Origin Resource Sharing
-app.use(bodyParser.json());  // Parse JSON requests
+app.use(cors());
+app.use(bodyParser.json());
 
 // Routes
-app.use('/api', cvRoutes);
-app.use('/auth', authRoutes);
+app.use('/v1/api', cvRoutes);
+app.use('/v1/account', authRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
