@@ -1,5 +1,4 @@
 // src/controllers/cvController.js
-
 const connection = require('../config/dbconfig');
 const { validationResult } = require('express-validator');
 
@@ -17,18 +16,18 @@ exports.createCV = async (req, res) => {
       'INSERT INTO cvs_data SET ?',
       {
         cv_unique_id,
-        auth_user_id: req.user.id,  // req.user.id should be the authenticated user's ID
+        auth_user_id: req.user.id,
         hobbies: cv_info.hobbies.description
       }
     );
 
-    const cv_id = cvResult.insertId; // This cv_id is important for relational data
+    const cv_id = cvResult.insertId;
 
     // Insert user data linked to cv_id
     const [userResult] = await connection.query(
       'INSERT INTO user_data SET ?',
       {
-        cv_id,  // Link user data to the CV
+        cv_id,
         first_name: user.first_name,
         last_name: user.last_name,
         job_title: user.job_title,
@@ -172,7 +171,6 @@ exports.createCV = async (req, res) => {
 // GET all CVs for the authenticated user
 exports.getAllCVs = async (req, res) => {
   try {
-    // Query to get basic CV information and user data for the authenticated user
     const [cvs] = await connection.query(`
       SELECT 
         cvs_data.cv_id, 
