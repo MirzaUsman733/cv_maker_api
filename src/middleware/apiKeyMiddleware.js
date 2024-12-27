@@ -1,6 +1,4 @@
-// src/middleware/apiKeyMiddleware.js
-
-const validApiKey = process.env.API_KEY; // Store your API key in environment variables for security
+const validApiKey = process.env.API_KEY;
 
 module.exports = (req, res, next) => {
   const apiKey = req.headers['x-api-key'];

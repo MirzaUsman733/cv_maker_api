@@ -7,7 +7,7 @@ exports.createCV = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
 
-  const { cv_unique_id, cv_info } = req.body;
+  const { cv_unique_id, cv_info, template_visibility = "Private" } = req.body;
   const user = cv_info.user;
 
   try {
@@ -17,7 +17,8 @@ exports.createCV = async (req, res) => {
       {
         cv_unique_id,
         auth_user_id: req.user.id,
-        hobbies: cv_info.hobbies.description
+        hobbies: cv_info.hobbies.description,
+        template_visibility
       }
     );
 
@@ -176,6 +177,7 @@ exports.getAllCVs = async (req, res) => {
         cvs_data.cv_id, 
         cvs_data.cv_unique_id, 
         cvs_data.hobbies,
+        cvs_data.template_visibility,
         user_data.first_name, 
         user_data.last_name, 
         user_data.job_title,
@@ -313,6 +315,7 @@ exports.getCVById = async (req, res) => {
       SELECT 
         cvs_data.cv_id,
         cvs_data.cv_unique_id,
+        cvs_data.template_visibility,
         user_data.first_name,
         user_data.last_name,
         user_data.job_title,
@@ -431,7 +434,7 @@ exports.getCVById = async (req, res) => {
 // UPDATE a CV by unique ID
 exports.updateCV = async (req, res) => {
   const { cv_unique_id } = req.params;
-  const { cv_info } = req.body;
+  const { cv_info, template_visibility } = req.body;
   const user = cv_info?.user;
 
   try {
@@ -447,6 +450,12 @@ exports.updateCV = async (req, res) => {
 
     const cv_id = cvData[0].cv_id;
 
+    if (template_visibility) {
+      await connection.query(
+        'UPDATE cvs_data SET template_visibility = ? WHERE cv_id = ?',
+        [template_visibility, cv_id]
+      );
+    }
     // Update user data
     if (user) {
       await connection.query(
@@ -631,5 +640,306 @@ exports.deleteCV = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error deleting CV' });
+  }
+};
+
+
+// exports.getAllPublicCVs = async (req, res) => {
+//   try {
+//     const page = parseInt(req.query.page) || 1;
+//     const limit = parseInt(req.query.limit) || 10;
+//     const offset = (page - 1) * limit;
+//     // Fetch all CVs with template_visibility set to 'Public'
+//     const [cvs] = await connection.query(`
+//       SELECT 
+//         cvs_data.cv_id, 
+//         cvs_data.cv_unique_id, 
+//         cvs_data.template_visibility,
+//         cvs_data.hobbies,
+//         user_data.first_name, 
+//         user_data.last_name, 
+//         user_data.job_title,
+//         user_data.address, 
+//         user_data.city, 
+//         user_data.postal_code, 
+//         user_data.country, 
+//         user_data.phone, 
+//         user_data.email, 
+//         user_data.date_of_birth, 
+//         user_data.place_of_birth, 
+//         user_data.nationality, 
+//         user_data.summary, 
+//         user_data.template_id
+//       FROM cvs_data
+//       INNER JOIN user_data ON cvs_data.cv_id = user_data.cv_id
+//       WHERE cvs_data.template_visibility = "Public"
+//       LIMIT ? OFFSET ?
+//     `, [limit, offset]);
+//     console.log("CVS Data : ",cvs)
+//       console.log(cvs.length)
+//     if (cvs.length === 0) {
+//       return res.status(404).json({ message: 'No public CVs found' });
+//     }
+
+//     // Fetch relational data for these CVs
+//     const cvIds = cvs.map(cv => cv.cv_id);
+
+//     const [employmentHistory] = await connection.query(`
+//       SELECT cv_id, job_title, employer, city, description, start_date, end_date, is_current
+//       FROM employment_history
+//       WHERE cv_id IN (?)
+//     `, [cvIds]);
+
+//     const [education] = await connection.query(`
+//       SELECT cv_id, degree, school_name, city, start_date, end_date, description
+//       FROM education
+//       WHERE cv_id IN (?)
+//     `, [cvIds]);
+
+//     const [courses] = await connection.query(`
+//       SELECT cv_id, title, institution, start_date, end_date
+//       FROM courses
+//       WHERE cv_id IN (?)
+//     `, [cvIds]);
+
+//     const [skills] = await connection.query(`
+//       SELECT cv_id, skill, proficiency
+//       FROM skills
+//       WHERE cv_id IN (?)
+//     `, [cvIds]);
+
+//     const [languages] = await connection.query(`
+//       SELECT cv_id, language, proficiency
+//       FROM languages
+//       WHERE cv_id IN (?)
+//     `, [cvIds]);
+
+//     const [internships] = await connection.query(`
+//       SELECT cv_id, job_title, company, city, description, start_date, end_date
+//       FROM internships
+//       WHERE cv_id IN (?)
+//     `, [cvIds]);
+
+//     const [links] = await connection.query(`
+//       SELECT cv_id, label, url
+//       FROM links
+//       WHERE cv_id IN (?)
+//     `, [cvIds]);
+
+//     // Map CV data and add relational data
+//     const cvMap = {};
+//     cvs.forEach(cv => {
+//       cvMap[cv.cv_id] = {
+//         cv_id: cv.cv_id,
+//         cv_unique_id: cv.cv_unique_id,
+//         template_visibility: cv.template_visibility,
+//         hobbies: cv.hobbies,
+//         user: {
+//           first_name: cv.first_name,
+//           last_name: cv.last_name,
+//           job_title: cv.job_title,
+//           address: cv.address,
+//           city: cv.city,
+//           postal_code: cv.postal_code,
+//           country: cv.country,
+//           phone: cv.phone,
+//           email: cv.email,
+//           date_of_birth: cv.date_of_birth,
+//           place_of_birth: cv.place_of_birth,
+//           nationality: cv.nationality,
+//           summary: cv.summary,
+//           template_id: cv.template_id
+//         },
+//         employment_history: [],
+//         education: [],
+//         courses: [],
+//         skills: [],
+//         languages: [],
+//         internships: [],
+//         links: []
+//       };
+//     });
+
+//     // Attach relational data
+//     employmentHistory.forEach(job => cvMap[job.cv_id].employment_history.push(job));
+//     education.forEach(edu => cvMap[edu.cv_id].education.push(edu));
+//     courses.forEach(course => cvMap[course.cv_id].courses.push(course));
+//     skills.forEach(skill => cvMap[skill.cv_id].skills.push(skill));
+//     languages.forEach(language => cvMap[language.cv_id].languages.push(language));
+//     internships.forEach(internship => cvMap[internship.cv_id].internships.push(internship));
+//     links.forEach(link => cvMap[link.cv_id].links.push(link));
+
+//     // Convert cvMap to array
+//     const result = Object.values(cvMap);
+
+//     // Send the response
+//     res.status(200).json({
+//       page: parseInt(page),
+//       limit: parseInt(limit),
+//       total_records: cvs.length,
+//       cvs: result,
+//     });
+
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: 'Error fetching public CVs' });
+//   }
+// };
+
+
+
+exports.getAllPublicCVs = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
+    const searchJobTitle = req.query.job_title; // Job title to search for
+
+    // Base SQL query
+    let baseQuery = `
+      SELECT 
+        cvs_data.cv_id, 
+        cvs_data.cv_unique_id, 
+        cvs_data.template_visibility,
+        cvs_data.hobbies,
+        user_data.first_name, 
+        user_data.last_name, 
+        user_data.job_title,
+        user_data.address, 
+        user_data.city, 
+        user_data.postal_code, 
+        user_data.country, 
+        user_data.phone, 
+        user_data.email, 
+        user_data.date_of_birth, 
+        user_data.place_of_birth, 
+        user_data.nationality, 
+        user_data.summary, 
+        user_data.template_id
+      FROM cvs_data
+      INNER JOIN user_data ON cvs_data.cv_id = user_data.cv_id
+      WHERE cvs_data.template_visibility = "Public"
+    `;
+
+    // Add search condition if job_title is provided
+    const queryParams = [];
+    if (searchJobTitle) {
+      baseQuery += ` AND user_data.job_title LIKE ?`;
+      queryParams.push(`%${searchJobTitle}%`);
+    }
+
+    // Add pagination
+    baseQuery += ` LIMIT ? OFFSET ?`;
+    queryParams.push(limit, offset);
+
+    // Execute query
+    const [cvs] = await connection.query(baseQuery, queryParams);
+
+    if (cvs.length === 0) {
+      return res.status(404).json({ message: 'No public CVs found' });
+    }
+
+    // Fetch relational data for these CVs
+    const cvIds = cvs.map(cv => cv.cv_id);
+
+    const [employmentHistory] = await connection.query(`
+      SELECT cv_id, job_title, employer, city, description, start_date, end_date, is_current
+      FROM employment_history
+      WHERE cv_id IN (?)
+    `, [cvIds]);
+
+    const [education] = await connection.query(`
+      SELECT cv_id, degree, school_name, city, start_date, end_date, description
+      FROM education
+      WHERE cv_id IN (?)
+    `, [cvIds]);
+
+    const [courses] = await connection.query(`
+      SELECT cv_id, title, institution, start_date, end_date
+      FROM courses
+      WHERE cv_id IN (?)
+    `, [cvIds]);
+
+    const [skills] = await connection.query(`
+      SELECT cv_id, skill, proficiency
+      FROM skills
+      WHERE cv_id IN (?)
+    `, [cvIds]);
+
+    const [languages] = await connection.query(`
+      SELECT cv_id, language, proficiency
+      FROM languages
+      WHERE cv_id IN (?)
+    `, [cvIds]);
+
+    const [internships] = await connection.query(`
+      SELECT cv_id, job_title, company, city, description, start_date, end_date
+      FROM internships
+      WHERE cv_id IN (?)
+    `, [cvIds]);
+
+    const [links] = await connection.query(`
+      SELECT cv_id, label, url
+      FROM links
+      WHERE cv_id IN (?)
+    `, [cvIds]);
+
+    // Map CV data and add relational data
+    const cvMap = {};
+    cvs.forEach(cv => {
+      cvMap[cv.cv_id] = {
+        cv_id: cv.cv_id,
+        cv_unique_id: cv.cv_unique_id,
+        template_visibility: cv.template_visibility,
+        hobbies: cv.hobbies,
+        user: {
+          first_name: cv.first_name,
+          last_name: cv.last_name,
+          job_title: cv.job_title,
+          address: cv.address,
+          city: cv.city,
+          postal_code: cv.postal_code,
+          country: cv.country,
+          phone: cv.phone,
+          email: cv.email,
+          date_of_birth: cv.date_of_birth,
+          place_of_birth: cv.place_of_birth,
+          nationality: cv.nationality,
+          summary: cv.summary,
+          template_id: cv.template_id
+        },
+        employment_history: [],
+        education: [],
+        courses: [],
+        skills: [],
+        languages: [],
+        internships: [],
+        links: []
+      };
+    });
+
+    // Attach relational data
+    employmentHistory.forEach(job => cvMap[job.cv_id].employment_history.push(job));
+    education.forEach(edu => cvMap[edu.cv_id].education.push(edu));
+    courses.forEach(course => cvMap[course.cv_id].courses.push(course));
+    skills.forEach(skill => cvMap[skill.cv_id].skills.push(skill));
+    languages.forEach(language => cvMap[language.cv_id].languages.push(language));
+    internships.forEach(internship => cvMap[internship.cv_id].internships.push(internship));
+    links.forEach(link => cvMap[link.cv_id].links.push(link));
+
+    // Convert cvMap to array
+    const result = Object.values(cvMap);
+
+    // Send the response
+    res.status(200).json({
+      page: parseInt(page),
+      limit: parseInt(limit),
+      total_records: cvs.length,
+      cvs: result,
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error fetching public CVs' });
   }
 };

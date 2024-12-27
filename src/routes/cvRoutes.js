@@ -23,6 +23,7 @@ router.post(
 // Route to GET all CVs for the authenticated user
 router.get('/cvs', authMiddleware, apiKeyMiddleware, cvController.getAllCVs);
 
+router.get('/all-cvs', apiKeyMiddleware, cvController.getAllPublicCVs);
 // Route to GET a single CV by unique ID for the authenticated user
 router.get('/cvs/:cv_unique_id', authMiddleware, apiKeyMiddleware, cvController.getCVById);
 
@@ -40,5 +41,6 @@ router.put(
 
 // Route to DELETE a CV by unique ID for the authenticated user
 router.delete('/cvs/:cv_unique_id', authMiddleware, apiKeyMiddleware, cvController.deleteCV);
+
 
 module.exports = router;

@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use('/v1', cvRoutes);
 app.use('/v1/account', authRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3100;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

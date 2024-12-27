@@ -1,5 +1,3 @@
-// src/routes/authRoutes.js
-
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
@@ -7,7 +5,6 @@ const { body } = require('express-validator');
 const authMiddleware = require('../middleware/authMiddleware');
 const apiKeyMiddleware = require('../middleware/apiKeyMiddleware');
 
-// Register route
 router.post(
   '/register',
   apiKeyMiddleware,
@@ -19,7 +16,6 @@ router.post(
   authController.registerUser
 );
 
-// Login route
 router.post(
   '/login',
   apiKeyMiddleware,
@@ -39,10 +35,9 @@ router.post(
   authController.loginUser
 );
 
-// Update user route
 router.put(
   '/update',
-  authMiddleware, // Middleware to verify the user is authenticated
+  authMiddleware,
   [
     body('username').optional().trim(),
     body('password').optional().isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
