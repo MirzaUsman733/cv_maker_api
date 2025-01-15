@@ -26,11 +26,9 @@ exports.registerUser = async (req, res) => {
 
     const userId = result[0].insertId;
 
-    const token = jwt.sign(
-      { id: userId, email },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+    const token = jwt.sign({ id: userId, email }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
 
     res.status(201).json({
       message: "User registered successfully and logged in",
@@ -38,18 +36,17 @@ exports.registerUser = async (req, res) => {
       name: username,
       email,
       isActive: true,
-      isTrue: true
+      isTrue: true,
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
       error: "Error registering user",
       isActive: false,
-      isTrue: false
+      isTrue: false,
     });
   }
 };
-
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -94,14 +91,12 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-
-
 exports.updateUser = async (req, res) => {
   const { id } = req.user;
   const { username, password } = req.body;
-  console.log(id)
+  console.log(id);
   const updates = {};
-  console.log(req.user)
+  console.log(req.user);
   try {
     if (username) {
       updates.username = username;
@@ -115,13 +110,15 @@ exports.updateUser = async (req, res) => {
     const query = [];
     const values = [];
 
-    Object.keys(updates).forEach(key => {
+    Object.keys(updates).forEach((key) => {
       query.push(`${key} = ?`);
       values.push(updates[key]);
     });
 
     if (query.length === 0) {
-      return res.status(400).json({ message: "No valid fields provided for update" });
+      return res
+        .status(400)
+        .json({ message: "No valid fields provided for update" });
     }
 
     values.push(id);
@@ -133,7 +130,7 @@ exports.updateUser = async (req, res) => {
 
     res.status(200).json({
       message: "User updated successfully",
-      updates: updates
+      updates: updates,
     });
   } catch (error) {
     console.error(error);

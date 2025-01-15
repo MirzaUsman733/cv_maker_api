@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2024 at 10:48 AM
+-- Generation Time: Jan 15, 2025 at 01:08 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -43,7 +43,10 @@ INSERT INTO `auth_user` (`auth_user_id`, `username`, `email`, `password`, `creat
 (1, 'newUsername', 'john@example.com', '$2b$10$MCWJlBjNTpDuh12e1Suug.mjoV5rAOiQnRu.K/WCRenwa5xomeCEq', '2024-11-04 08:48:25'),
 (2, 'usmankhalid', 'usmankhalid@gmail.com', '$2b$10$O12GsTZYldRo0jzcuaVhFOhxG3cLhjX/HFNj3b.8EMjgahTB8uDhq', '2024-11-04 12:35:11'),
 (3, 'usman', 'usman@gmail.com', '$2b$10$srgnWaUmdqATw3didGsPv.IEeevbYsrYLgGGyl7214/wkc3xjVaba', '2024-11-05 09:17:23'),
-(4, 'updatetestuser', 'testuser@example.com', '$2b$10$/OsgSQ7tFD1fd87UxqZdv.xOKNcRttFdffIFEPbvRndSgdKDyWT1S', '2024-12-27 06:11:48');
+(4, 'updatetestuser', 'testuser@example.com', '$2b$10$/OsgSQ7tFD1fd87UxqZdv.xOKNcRttFdffIFEPbvRndSgdKDyWT1S', '2024-12-27 06:11:48'),
+(5, 'John Doe', 'john.doe@example.com', '$2a$10$tdcaPfP19KyiqWnhVoDB9O/K91ezMs6SuLAZTQPvXG7d0N7z.GB52', '2025-01-13 09:10:32'),
+(6, 'basogapaj', 'wony@mailinator.com', '$2a$10$srbz9M29h52PY1HF9P320uHVfx18Iw.Q2kAwtJU.22S7OTUlWKohi', '2025-01-14 09:49:23'),
+(7, 'detafoqu', 'gutysiwune@mailinator.com', '$2a$10$LK4D4c6WLuPePXGeMYrKv.1LFsmZBIsvz5qv0lwAbCTt1IHHhGt3m', '2025-01-14 12:04:33');
 
 -- --------------------------------------------------------
 
@@ -94,7 +97,13 @@ INSERT INTO `courses` (`course_id`, `cv_id`, `title`, `institution`, `start_date
 (34, 22, 'React Development', 'Udemy', '2021-02-01', '2021-05-01'),
 (35, 22, 'Machine Learning Basics', 'Coursera', '2019-01-01', '2019-03-01'),
 (36, 23, 'React Development', 'Udemy', '2021-02-01', '2021-05-01'),
-(37, 23, 'Machine Learning Basics', 'Coursera', '2019-01-01', '2019-03-01');
+(37, 23, 'Machine Learning Basics', 'Coursera', '2019-01-01', '2019-03-01'),
+(38, 24, 'Advanced JavaScript', 'Coursera', '2021-06-01', '2021-09-01'),
+(39, 24, 'Cloud Computing Fundamentals', 'edX', '2022-03-01', '2022-06-01'),
+(40, 25, 'Molestiae atque ad r', 'Rerum molestiae corp', '1972-01-21', '2013-09-20'),
+(41, 26, 'Officiis soluta cons', 'Fuga Ut tenetur lab', '2008-08-05', '1978-05-22'),
+(42, 27, 'Repudiandae dolor ve', 'Deleniti aut consect', '1980-06-07', '2012-05-20'),
+(43, 28, 'Aliqua Tempor animi', 'Dolor voluptatem fug', '2024-01-06', '1987-03-26');
 
 -- --------------------------------------------------------
 
@@ -133,7 +142,12 @@ INSERT INTO `cvs_data` (`cv_id`, `auth_user_id`, `cv_unique_id`, `hobbies`, `cre
 (18, 4, 'unique_cv_id_8641', 'Traveling, Photography, Coding, Painting', '2024-12-27 09:58:03', NULL, 'Public'),
 (20, 4, 'unique_cv_id_9641', 'Traveling, Photography, Coding, Painting', '2024-12-27 10:24:33', NULL, 'Public'),
 (22, 4, 'unique_cv_id_9121', 'Traveling, Photography, Coding, Painting', '2024-12-30 08:41:27', NULL, 'Public'),
-(23, 4, 'unique_cv_id_1581', 'Traveling, Photography, Coding, Painting', '2024-12-30 08:42:16', NULL, 'Public');
+(23, 4, 'unique_cv_id_1581', 'Traveling, Photography, Coding, Painting', '2024-12-30 08:42:16', NULL, 'Public'),
+(24, 5, 'unique-cv-id-12345', 'Reading, Traveling, and Coding', '2025-01-13 09:20:03', NULL, 'Public'),
+(25, 6, 'cv-1736849494667', '<p>Ut ratione atque qua.</p>', '2025-01-14 10:11:34', NULL, 'Private'),
+(26, 7, 'cv-1736856308133', '<p>Ad minima et volupta.</p>', '2025-01-14 12:05:08', NULL, 'Private'),
+(27, 7, 'cv-1736856318669', '<p>Incididunt iure quia.</p>', '2025-01-14 12:05:18', NULL, 'Private'),
+(28, 5, 'cv-1736931040613', '<p>Et voluptatem impedi.</p>', '2025-01-15 08:50:40', NULL, 'Private');
 
 -- --------------------------------------------------------
 
@@ -182,7 +196,12 @@ INSERT INTO `education` (`education_id`, `cv_id`, `degree`, `school_name`, `city
 (27, 22, 'Master\'s in Computer Science', 'Stanford University', 'Stanford', '2014-09-01', '2016-06-01', 'Specialized in software development and AI.'),
 (28, 22, 'Bachelor\'s in Information Technology', 'UC Berkeley', 'Berkeley', '2010-09-01', '2014-06-01', 'Focused on software engineering and networking.'),
 (29, 23, 'Master\'s in Computer Science', 'Stanford University', 'Stanford', '2014-09-01', '2016-06-01', 'Specialized in software development and AI.'),
-(30, 23, 'Bachelor\'s in Information Technology', 'UC Berkeley', 'Berkeley', '2010-09-01', '2014-06-01', 'Focused on software engineering and networking.');
+(30, 23, 'Bachelor\'s in Information Technology', 'UC Berkeley', 'Berkeley', '2010-09-01', '2014-06-01', 'Focused on software engineering and networking.'),
+(31, 24, 'Bachelor of Science in Computer Science', 'Example University', 'Boston', '2010-08-01', '2014-05-01', 'Studied software engineering, data structures, and algorithms.'),
+(32, 25, 'Sint in voluptatem', 'Ipsa eum maxime lab', 'Dolor distinctio Re', '1979-06-16', '1989-04-12', '<p>Ad qui nihil est, do.</p>'),
+(33, 26, 'Nulla asperiores des', 'Qui perferendis quo ', 'Voluptates mollit ut', '1987-11-21', '2020-06-16', '<p>Et molestias sint, e.</p>'),
+(34, 27, 'Aut culpa animi vol', 'Eius ullamco digniss', 'Explicabo Ducimus ', '1980-11-21', '1987-03-06', '<p>Est, alias quo in qu.</p>'),
+(35, 28, 'Doloremque blanditii', 'Dolorem eos officii', 'Dolor quia velit mo', '1983-06-02', '1977-11-11', '<p>Est, voluptatem, mol.</p>');
 
 -- --------------------------------------------------------
 
@@ -193,7 +212,7 @@ INSERT INTO `education` (`education_id`, `cv_id`, `degree`, `school_name`, `city
 CREATE TABLE `employment_history` (
   `employment_id` int(11) NOT NULL,
   `cv_id` int(11) DEFAULT NULL,
-  `job_title` varchar(100) DEFAULT NULL,
+  `jobTitle` varchar(100) DEFAULT NULL,
   `employer` varchar(100) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
   `description` text DEFAULT NULL,
@@ -206,7 +225,7 @@ CREATE TABLE `employment_history` (
 -- Dumping data for table `employment_history`
 --
 
-INSERT INTO `employment_history` (`employment_id`, `cv_id`, `job_title`, `employer`, `city`, `description`, `start_date`, `end_date`, `is_current`) VALUES
+INSERT INTO `employment_history` (`employment_id`, `cv_id`, `jobTitle`, `employer`, `city`, `description`, `start_date`, `end_date`, `is_current`) VALUES
 (1, 2, 'Software Engineer', 'Tech Corp', 'New York', 'Worked on various software projects, including developing and deploying new features.', '2020-01-01', '2021-12-31', 0),
 (2, 2, 'Senior Developer', 'Innovate Ltd', 'San Francisco', 'Led a team of developers to build scalable web applications.', '2022-01-01', '2023-12-31', 1),
 (3, 3, 'Software Engineer', 'Tech Corp', 'New York', 'Worked on various software projects, including developing and deploying new features.', '2020-01-01', '2021-12-31', 0),
@@ -236,7 +255,13 @@ INSERT INTO `employment_history` (`employment_id`, `cv_id`, `job_title`, `employ
 (34, 22, 'Lead Developer', 'InnovateTech', 'Seattle', 'Led a team to develop innovative SaaS solutions.', '2019-04-01', '2022-06-30', 0),
 (35, 22, 'Software Engineer', 'CodeWorks', 'San Diego', 'Developed microservices and APIs.', '2015-08-01', '2019-03-31', 0),
 (36, 23, 'Lead Developer', 'InnovateTech', 'Seattle', 'Led a team to develop innovative SaaS solutions.', '2019-04-01', '2022-06-30', 0),
-(37, 23, 'Software Engineer', 'CodeWorks', 'San Diego', 'Developed microservices and APIs.', '2015-08-01', '2019-03-31', 0);
+(37, 23, 'Software Engineer', 'CodeWorks', 'San Diego', 'Developed microservices and APIs.', '2015-08-01', '2019-03-31', 0),
+(38, 24, 'Software Developer', 'TechCorp', 'San Francisco', 'Developed full-stack web applications.', '2020-01-01', '2022-01-01', 0),
+(39, 24, 'Senior Software Engineer', 'Innovatech', 'New York', 'Led a team of developers in building scalable applications.', '2022-02-01', NULL, 1),
+(40, 25, 'Impedit nostrum qua', 'Qui odit earum deser', 'Perspiciatis dolore', '<p>Nesciunt, in autem q.</p>', '1983-10-25', '1987-09-26', 1),
+(41, 26, 'Accusantium corporis', 'Vel consequatur Des', 'Nesciunt autem ipsa', '<p>Duis et iure quo ex .</p>', '1993-09-24', '2017-03-15', 0),
+(42, 27, 'Dignissimos eu est o', 'Velit fuga Et labor', 'Repudiandae alias se', '<p>Aut exercitationem e.</p>', '1982-12-19', '1998-08-09', 0),
+(43, 28, 'Consequuntur ex quis', 'Aliqua Aliquip offi', 'Quo eiusmod consequa', '<p>Voluptatem sed labor.</p>', '2011-03-21', '1982-11-11', 0);
 
 -- --------------------------------------------------------
 
@@ -247,7 +272,7 @@ INSERT INTO `employment_history` (`employment_id`, `cv_id`, `job_title`, `employ
 CREATE TABLE `internships` (
   `internship_id` int(11) NOT NULL,
   `cv_id` int(11) DEFAULT NULL,
-  `job_title` varchar(100) DEFAULT NULL,
+  `jobTitle` varchar(100) DEFAULT NULL,
   `company` varchar(100) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
   `description` text DEFAULT NULL,
@@ -259,7 +284,7 @@ CREATE TABLE `internships` (
 -- Dumping data for table `internships`
 --
 
-INSERT INTO `internships` (`internship_id`, `cv_id`, `job_title`, `company`, `city`, `description`, `start_date`, `end_date`) VALUES
+INSERT INTO `internships` (`internship_id`, `cv_id`, `jobTitle`, `company`, `city`, `description`, `start_date`, `end_date`) VALUES
 (2, 6, 'Software Intern', 'Startup Hub', 'San Francisco', 'Assisted in building the backend of a web application.', '2015-06-01', '2015-09-01'),
 (3, 7, 'Software Intern', 'Startup Hub', 'San Francisco', 'Assisted in building the backend of a web application.', '2015-06-01', '2015-09-01'),
 (5, 9, 'Software Intern', 'Startup Hub', 'San Francisco', 'Assisted in building the backend of a web application.', '2015-06-01', '2015-09-01'),
@@ -281,7 +306,12 @@ INSERT INTO `internships` (`internship_id`, `cv_id`, `job_title`, `company`, `ci
 (23, 22, 'Software Intern', 'NextGen Tech', 'Boston', 'Collaborated on the development of client-side applications.', '2016-06-01', '2016-09-01'),
 (24, 22, 'Backend Developer Intern', 'TechNova', 'Chicago', 'Worked on optimizing database queries.', '2015-06-01', '2015-09-01'),
 (25, 23, 'Software Intern', 'NextGen Tech', 'Boston', 'Collaborated on the development of client-side applications.', '2016-06-01', '2016-09-01'),
-(26, 23, 'Backend Developer Intern', 'TechNova', 'Chicago', 'Worked on optimizing database queries.', '2015-06-01', '2015-09-01');
+(26, 23, 'Backend Developer Intern', 'TechNova', 'Chicago', 'Worked on optimizing database queries.', '2015-06-01', '2015-09-01'),
+(27, 24, 'Software Intern', 'StartupX', 'Chicago', 'Worked on API development and integration.', '2013-06-01', '2013-08-01'),
+(28, 25, 'Ab sint porro et ali', 'Voluptas sit enim m', 'Elit illo sapiente ', '<p>Aspernatur laboriosa.</p>', '2011-04-21', '2016-10-24'),
+(29, 26, 'Nulla aut ipsum at ', 'Dolor ex ea nostrum ', 'Voluptates magni rei', '<p>Excepteur aut sed el.</p>', '1999-03-18', '1980-01-12'),
+(30, 27, 'Quis tenetur et et e', 'Id quas dicta sed qu', 'Placeat est ut non ', '<p>Quia adipisci est, i.</p>', '2009-10-28', '1972-06-15'),
+(31, 28, 'Quia vel dignissimos', 'Natus aut ad eaque i', 'Id non ea consectetu', '<p>Quo inventore fuga. .</p>', '1983-12-20', '2018-02-12');
 
 -- --------------------------------------------------------
 
@@ -332,7 +362,13 @@ INSERT INTO `languages` (`language_id`, `cv_id`, `language`, `proficiency`) VALU
 (36, 22, 'English', 0),
 (37, 22, 'Spanish', 0),
 (38, 23, 'English', 0),
-(39, 23, 'Spanish', 0);
+(39, 23, 'Spanish', 0),
+(40, 24, 'English', 0),
+(41, 24, 'Spanish', 0),
+(42, 25, 'Qui minus quia adipi', 0),
+(43, 26, 'Consequatur possimu', 0),
+(44, 27, 'Voluptate ut deserun', 0),
+(45, 28, 'Fugiat est est enim ', 0);
 
 -- --------------------------------------------------------
 
@@ -382,7 +418,13 @@ INSERT INTO `links` (`link_id`, `cv_id`, `label`, `url`) VALUES
 (34, 22, 'GitHub', 'https://github.com/janesmith'),
 (35, 23, 'Portfolio', 'https://portfolio.janesmith.dev'),
 (36, 23, 'LinkedIn', 'https://linkedin.com/in/janesmith'),
-(37, 23, 'GitHub', 'https://github.com/janesmith');
+(37, 23, 'GitHub', 'https://github.com/janesmith'),
+(38, 24, 'LinkedIn', 'https://www.linkedin.com/in/johndoe'),
+(39, 24, 'GitHub', 'https://github.com/johndoe'),
+(40, 25, 'Eveniet omnis optio', 'https://www.bijyceloqedej.co'),
+(41, 26, 'Ratione molestias cu', 'https://www.doz.co'),
+(42, 27, 'Ea cillum et velit i', 'https://www.xypyvedufisusal.cc'),
+(43, 28, 'Est expedita duis ni', 'https://www.qigehubogoloja.co.uk');
 
 -- --------------------------------------------------------
 
@@ -447,7 +489,13 @@ INSERT INTO `skills` (`skill_id`, `cv_id`, `skill`, `proficiency`) VALUES
 (53, 22, 'Python', 0),
 (54, 23, 'React.js', 0),
 (55, 23, 'Node.js', 0),
-(56, 23, 'Python', 0);
+(56, 23, 'Python', 0),
+(57, 24, 'JavaScript', 0),
+(58, 24, 'React', 0),
+(59, 25, 'Est ex sit soluta cu', 3),
+(60, 26, 'Eius ea dolor iusto ', 3),
+(61, 27, 'Provident molestias', 3),
+(62, 28, 'Ad id sint quos nihi', 3);
 
 -- --------------------------------------------------------
 
@@ -458,9 +506,9 @@ INSERT INTO `skills` (`skill_id`, `cv_id`, `skill`, `proficiency`) VALUES
 CREATE TABLE `user_data` (
   `user_data_id` int(11) NOT NULL,
   `cv_id` int(11) DEFAULT NULL,
-  `first_name` varchar(100) DEFAULT NULL,
-  `last_name` varchar(100) DEFAULT NULL,
-  `job_title` varchar(100) DEFAULT NULL,
+  `firstName` varchar(100) DEFAULT NULL,
+  `lastName` varchar(100) DEFAULT NULL,
+  `jobTitle` varchar(100) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
   `postal_code` varchar(20) DEFAULT NULL,
@@ -478,7 +526,7 @@ CREATE TABLE `user_data` (
 -- Dumping data for table `user_data`
 --
 
-INSERT INTO `user_data` (`user_data_id`, `cv_id`, `first_name`, `last_name`, `job_title`, `address`, `city`, `postal_code`, `country`, `phone`, `date_of_birth`, `place_of_birth`, `nationality`, `email`, `template_id`, `summary`) VALUES
+INSERT INTO `user_data` (`user_data_id`, `cv_id`, `firstName`, `lastName`, `jobTitle`, `address`, `city`, `postal_code`, `country`, `phone`, `date_of_birth`, `place_of_birth`, `nationality`, `email`, `template_id`, `summary`) VALUES
 (1, NULL, 'John', 'Doe', 'Software Engineer', '123 Main St', 'New York', '10001', 'USA', '+1234567890', '1990-01-01', 'New York', 'American', 'john.doe@example.com', NULL, NULL),
 (2, NULL, 'John', 'Doe', 'Software Engineer', '123 Main St', 'New York', '10001', 'USA', '+1234567890', '1990-01-01', 'New York', 'American', 'john.doe@example.com', NULL, NULL),
 (3, NULL, 'John', 'Doe', 'Software Engineer', '123 Main St', 'New York', '10001', 'USA', '+1234567890', '1990-01-01', 'New York', 'American', 'john.doe@example.com', NULL, NULL),
@@ -498,7 +546,12 @@ INSERT INTO `user_data` (`user_data_id`, `cv_id`, `first_name`, `last_name`, `jo
 (19, 18, 'Jane', 'Smith', 'Frontend Developer', '456 Elm St', 'Los Angeles', '90001', 'USA', '+9876543210', '1988-05-15', 'Chicago', 'American', 'jane.smith@example.com', 2, 'Innovative developer with 7+ years in building scalable web applications.'),
 (20, 20, 'Jane', 'Smith', 'Frontend Developer', '456 Elm St', 'Los Angeles', '90001', 'USA', '+9876543210', '1988-05-15', 'Chicago', 'American', 'jane.smith@example.com', 2, 'Innovative developer with 7+ years in building scalable web applications.'),
 (21, 22, 'Jane', 'Smith', 'Frontend Developer', '456 Elm St', 'Los Angeles', '90001', 'USA', '+9876543210', '1988-05-15', 'Chicago', 'American', 'jane.smith@example.com', 2, 'Innovative developer with 7+ years in building scalable web applications.'),
-(22, 23, 'Jane', 'Smith', 'FullStack Developer', '456 Elm St', 'Los Angeles', '90001', 'USA', '+9876543210', '1988-05-15', 'Chicago', 'American', 'usman@gmail.com', 2, 'Innovative developer with 7+ years in building scalable web applications.');
+(22, 23, 'Jane', 'Smith', 'FullStack Developer', '456 Elm St', 'Los Angeles', '90001', 'USA', '+9876543210', '1988-05-15', 'Chicago', 'American', 'usman@gmail.com', 2, 'Innovative developer with 7+ years in building scalable web applications.'),
+(23, 24, 'John', 'Doe', 'Software Engineer', '123 Main Street', 'New York', '10001', 'USA', '+1234567890', '1990-01-01', 'New York', 'American', 'john.doe@example.com', 1, 'Experienced software engineer with expertise in web development.'),
+(24, 25, 'Marvin', 'Guzman', 'Est qui dignissimos voluptate tempor suscipit voluptatem ullamco lorem laborum harum incidunt obcaec', '123 Main Street', 'Fuga Est num', '12345', 'In culpa autem', '+1 (211) 641-4014', '1990-01-01', 'City Name', 'Nationality', 'rafyzy@mailinator.com', 1, '<p>Laborum. Veritatis v.</p>'),
+(25, 26, 'Cynthia', 'Parks', 'Neque odio nemo nisi qui eiusmod ea', '123 Main Street', 'Delectus enim', '12345', 'Mollitia in od', '+1 (585) 325-8096', '1990-01-01', 'City Name', 'Nationality', 'bunapocih@mailinator.com', 1, '<p>Ullamco sit aut exce.</p>'),
+(26, 27, 'Castor', 'Solomon', 'Quibusdam cupidatat eum veritatis iure sed dolores aut', '123 Main Street', 'Facilis quam a', '12345', 'In incididunt ', '+1 (771) 105-9022', '1990-01-01', 'City Name', 'Nationality', 'duzapurug@mailinator.com', 1, '<p>Rerum aute dolore su.</p>'),
+(27, 28, 'Katelyn', 'Harrington', 'Unde quia qui voluptatem alias mollitia et ut voluptatem nemo ut in', NULL, 'Minus libero a', NULL, 'Minima exercit', '+1 (606) 443-1946', NULL, NULL, NULL, 'fupidojudy@mailinator.com', 8, '<p>Deserunt nostrum hic.</p>');
 
 --
 -- Indexes for dumped tables
@@ -585,61 +638,61 @@ ALTER TABLE `user_data`
 -- AUTO_INCREMENT for table `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `auth_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `auth_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `cvs_data`
 --
 ALTER TABLE `cvs_data`
-  MODIFY `cv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `cv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `education`
 --
 ALTER TABLE `education`
-  MODIFY `education_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `education_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `employment_history`
 --
 ALTER TABLE `employment_history`
-  MODIFY `employment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `employment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `internships`
 --
 ALTER TABLE `internships`
-  MODIFY `internship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `internship_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `language_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `links`
 --
 ALTER TABLE `links`
-  MODIFY `link_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `link_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `skill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
-  MODIFY `user_data_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `user_data_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
