@@ -1,5 +1,4 @@
 // src/routes/cvRoutes.js
-
 const express = require("express");
 const router = express.Router();
 const cvController = require("../controllers/cvController");
@@ -38,8 +37,8 @@ router.get(
 // Route to UPDATE a CV by unique ID with input validation
 router.put(
   "/cvs/:cv_unique_id",
-  authMiddleware, // Protect route with JWT middleware
-  apiKeyMiddleware, // Check x-api-key header
+  authMiddleware,
+  apiKeyMiddleware,
   [
     body("cv_info.user.firstName")
       .optional()

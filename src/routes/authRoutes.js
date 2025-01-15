@@ -28,15 +28,6 @@ router.post(
   authController.loginUser
 );
 
-// router.post(
-//   '/login',
-//   [
-//     body('email').isEmail().withMessage('Valid email is required'),
-//     body('password').notEmpty().withMessage('Password is required')
-//   ],
-//   authController.loginUser
-// );
-
 router.put(
   "/update",
   authMiddleware,

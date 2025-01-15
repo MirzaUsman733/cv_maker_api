@@ -94,9 +94,7 @@ exports.loginUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   const { id } = req.user;
   const { username, password } = req.body;
-  console.log(id);
   const updates = {};
-  console.log(req.user);
   try {
     if (username) {
       updates.username = username;
