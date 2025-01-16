@@ -39,7 +39,6 @@ exports.registerUser = async (req, res) => {
       isTrue: true,
     });
   } catch (error) {
-    console.error(error);
     res.status(500).json({
       error: "Error registering user",
       isActive: false,
@@ -82,7 +81,6 @@ exports.loginUser = async (req, res) => {
       isTrue: true,
     });
   } catch (error) {
-    console.error(error);
     res.status(500).json({
       error: "Error logging in user",
       isActive: false,
@@ -131,7 +129,6 @@ exports.updateUser = async (req, res) => {
       updates: updates,
     });
   } catch (error) {
-    console.error(error);
     res.status(500).json({
       error: "Error updating user",
     });

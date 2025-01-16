@@ -22,15 +22,25 @@ router.post(
   cvController.createCV
 );
 
-// Route to GET all CVs for the authenticated user
 router.get("/cvs", authMiddleware, apiKeyMiddleware, cvController.getAllCVs);
 
 router.get("/all-cvs", apiKeyMiddleware, cvController.getAllPublicCVs);
-// Route to GET a single CV by unique ID for the authenticated user
 router.get(
   "/cvs/:cv_unique_id",
-  authMiddleware,
   apiKeyMiddleware,
+  async (req, res, next) => {
+    try {
+      const cv = await cvController.getCVRecord(req.params.cv_unique_id);
+      if (cv && cv.template_visibility === "Public") {
+        return cvController.getCVById(req, res);
+      }
+
+      next();
+    } catch (error) {
+      next(error);
+    }
+  },
+  authMiddleware,
   cvController.getCVById
 );
 
