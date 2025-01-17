@@ -8,6 +8,9 @@ const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
+app.use(bodyParser.json({ limit: "50mb" })); // Adjust if needed
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+
 // Middleware
 app.use(helmet());
 app.use(cors());

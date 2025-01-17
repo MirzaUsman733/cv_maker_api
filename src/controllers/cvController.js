@@ -8,7 +8,12 @@ exports.createCV = async (req, res) => {
   if (!errors.isEmpty())
     return res.status(400).json({ errors: errors.array() });
 
-  const { cv_unique_id, cv_info, template_visibility = "Private" } = req.body;
+  const {
+    cv_unique_id,
+    cv_info,
+    template_visibility = "Private",
+    // template_image,
+  } = req.body;
   const user = cv_info.user;
 
   try {
@@ -18,6 +23,7 @@ exports.createCV = async (req, res) => {
       auth_user_id: req.user.id,
       hobbies: cv_info.hobbies.description,
       template_visibility,
+      // template_image,
     });
 
     const cv_id = cvResult.insertId;
@@ -497,7 +503,7 @@ exports.getCVById = async (req, res) => {
 
     // Construct query dynamically based on visibility
     let query = `
-      SELECT 
+      SELECT
         cvs_data.cv_id,
         cvs_data.template_visibility,
         cvs_data.cv_unique_id,
@@ -578,6 +584,7 @@ exports.getCVById = async (req, res) => {
       cv_id: cv_id,
       cv_unique_id: cvDetail.cv_unique_id,
       template_visibility: cvDetail.template_visibility,
+      // template_image: cvDetail.template_image,
       user: {
         firstName: cvDetail.firstName,
         lastName: cvDetail.lastName,
@@ -895,69 +902,68 @@ exports.getAllPublicCVs = async (req, res) => {
 
     // Fetch relational data for these CVs
     const cvIds = cvs.map((cv) => cv.cv_id);
-    console.log(cvs)
-    const [employmentHistory] = await connection.query(
-      `
-      SELECT cv_id, jobTitle, employer, city, description, start_date, end_date, is_current
-      FROM employment_history
-      WHERE cv_id IN (?)
-    `,
-      [cvIds]
-    );
+    // const [employmentHistory] = await connection.query(
+    //   `
+    //   SELECT cv_id, jobTitle, employer, city, description, start_date, end_date, is_current
+    //   FROM employment_history
+    //   WHERE cv_id IN (?)
+    // `,
+    //   [cvIds]
+    // );
 
-    const [education] = await connection.query(
-      `
-      SELECT cv_id, degree, school_name, city, start_date, end_date, description
-      FROM education
-      WHERE cv_id IN (?)
-    `,
-      [cvIds]
-    );
+    // const [education] = await connection.query(
+    //   `
+    //   SELECT cv_id, degree, school_name, city, start_date, end_date, description
+    //   FROM education
+    //   WHERE cv_id IN (?)
+    // `,
+    //   [cvIds]
+    // );
 
-    const [courses] = await connection.query(
-      `
-      SELECT cv_id, title, institution, start_date, end_date
-      FROM courses
-      WHERE cv_id IN (?)
-    `,
-      [cvIds]
-    );
+    // const [courses] = await connection.query(
+    //   `
+    //   SELECT cv_id, title, institution, start_date, end_date
+    //   FROM courses
+    //   WHERE cv_id IN (?)
+    // `,
+    //   [cvIds]
+    // );
 
-    const [skills] = await connection.query(
-      `
-      SELECT cv_id, skill, proficiency
-      FROM skills
-      WHERE cv_id IN (?)
-    `,
-      [cvIds]
-    );
+    // const [skills] = await connection.query(
+    //   `
+    //   SELECT cv_id, skill, proficiency
+    //   FROM skills
+    //   WHERE cv_id IN (?)
+    // `,
+    //   [cvIds]
+    // );
 
-    const [languages] = await connection.query(
-      `
-      SELECT cv_id, language, proficiency
-      FROM languages
-      WHERE cv_id IN (?)
-    `,
-      [cvIds]
-    );
+    // const [languages] = await connection.query(
+    //   `
+    //   SELECT cv_id, language, proficiency
+    //   FROM languages
+    //   WHERE cv_id IN (?)
+    // `,
+    //   [cvIds]
+    // );
 
-    const [internships] = await connection.query(
-      `
-      SELECT cv_id, jobTitle, company, city, description, start_date, end_date
-      FROM internships
-      WHERE cv_id IN (?)
-    `,
-      [cvIds]
-    );
+    // const [internships] = await connection.query(
+    //   `
+    //   SELECT cv_id, jobTitle, company, city, description, start_date, end_date
+    //   FROM internships
+    //   WHERE cv_id IN (?)
+    // `,
+    //   [cvIds]
+    // );
 
-    const [links] = await connection.query(
-      `
-      SELECT cv_id, label, url
-      FROM links
-      WHERE cv_id IN (?)
-    `,
-      [cvIds]
-    );
+    // const [links] = await connection.query(
+    //   `
+    //   SELECT cv_id, label, url
+    //   FROM links
+    //   WHERE cv_id IN (?)
+    // `,
+    //   [cvIds]
+    // );
 
     // Map CV data and add relational data
     const cvMap = {};
@@ -965,49 +971,49 @@ exports.getAllPublicCVs = async (req, res) => {
       cvMap[cv.cv_id] = {
         cv_id: cv.cv_id,
         cv_unique_id: cv.cv_unique_id,
-        created_at: cv.created_at,
+        // created_at: cv.created_at,
         template_visibility: cv.template_visibility,
-        hobbies: cv.hobbies,
+        // hobbies: cv.hobbies,
         user: {
           firstName: cv.firstName,
           lastName: cv.lastName,
           jobTitle: cv.jobTitle,
-          address: cv.address,
+          // address: cv.address,
           city: cv.city,
-          postal_code: cv.postal_code,
+          // postal_code: cv.postal_code,
           country: cv.country,
           phone: cv.phone,
           email: cv.email,
-          date_of_birth: cv.date_of_birth,
-          place_of_birth: cv.place_of_birth,
+          // date_of_birth: cv.date_of_birth,
+          // place_of_birth: cv.place_of_birth,
           nationality: cv.nationality,
           summary: cv.summary,
           template_id: cv.template_id,
         },
-        employment_history: [],
-        education: [],
-        courses: [],
-        skills: [],
-        languages: [],
-        internships: [],
-        links: [],
+        // employment_history: [],
+        // education: [],
+        // courses: [],
+        // skills: [],
+        // languages: [],
+        // internships: [],
+        // links: [],
       };
     });
 
     // Attach relational data
-    employmentHistory.forEach((job) =>
-      cvMap[job.cv_id].employment_history.push(job)
-    );
-    education.forEach((edu) => cvMap[edu.cv_id].education.push(edu));
-    courses.forEach((course) => cvMap[course.cv_id].courses.push(course));
-    skills.forEach((skill) => cvMap[skill.cv_id].skills.push(skill));
-    languages.forEach((language) =>
-      cvMap[language.cv_id].languages.push(language)
-    );
-    internships.forEach((internship) =>
-      cvMap[internship.cv_id].internships.push(internship)
-    );
-    links.forEach((link) => cvMap[link.cv_id].links.push(link));
+    // employmentHistory.forEach((job) =>
+    //   cvMap[job.cv_id].employment_history.push(job)
+    // );
+    // education.forEach((edu) => cvMap[edu.cv_id].education.push(edu));
+    // courses.forEach((course) => cvMap[course.cv_id].courses.push(course));
+    // skills.forEach((skill) => cvMap[skill.cv_id].skills.push(skill));
+    // languages.forEach((language) =>
+    //   cvMap[language.cv_id].languages.push(language)
+    // );
+    // internships.forEach((internship) =>
+    //   cvMap[internship.cv_id].internships.push(internship)
+    // );
+    // links.forEach((link) => cvMap[link.cv_id].links.push(link));
 
     // Convert cvMap to array
     const result = Object.values(cvMap);
